@@ -98,14 +98,18 @@ class CharacterListViewModel(
 
     private fun loadMore() {
         viewModelScope.launch {
-            if (!state.value.endReached && !state.value.isLoadingMore) {
+            if (
+                !state.value.endReached
+                && !state.value.isLoadingMore
+                && state.value.searchQuery.isEmpty()
+            ) {
                 paginator.loadNextItems()
             }
         }
     }
 
     private fun searchCharacters(query: String) {
-        updateUiState { copy(searchQuery = query, isSearching = true) }
+        updateUiState { copy(searchQuery = query) }
 
         if (query.isBlank()) {
             clearSearch()
@@ -120,7 +124,6 @@ class CharacterListViewModel(
                         updateUiState {
                             copy(
                                 characters = characters.map { it.toUi() },
-                                isSearching = false,
                                 error = null
                             )
                         }
@@ -130,7 +133,6 @@ class CharacterListViewModel(
                             copy(
                                 error = error.message
                                     ?: applicationContext.getString(R.string.search_failed),
-                                isSearching = false
                             )
                         }
                     }
@@ -140,7 +142,6 @@ class CharacterListViewModel(
                     copy(
                         error = e.message
                             ?: applicationContext.getString(R.string.search_failed),
-                        isSearching = false
                     )
                 }
             }
@@ -148,7 +149,7 @@ class CharacterListViewModel(
     }
 
     private fun clearSearch() {
-        updateUiState { copy(searchQuery = "", isSearching = false) }
+        updateUiState { copy(searchQuery = "") }
         loadCharacters()
     }
 

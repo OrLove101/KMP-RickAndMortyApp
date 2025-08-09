@@ -9,7 +9,6 @@ interface CharacterListContract {
         val isLoadingMore: Boolean = false,
         val error: String? = null,
         val searchQuery: String = "",
-        val isSearching: Boolean = false,
         val page: Int = 1,
         val endReached: Boolean = false
     )

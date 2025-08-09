@@ -29,7 +29,6 @@ import com.orlove.mortyapp.util.collectInLaunchedEffect
 import com.orlove.mortyapp.util.use
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharacterDetailScreen(
     onNavigateBack: () -> Unit,
