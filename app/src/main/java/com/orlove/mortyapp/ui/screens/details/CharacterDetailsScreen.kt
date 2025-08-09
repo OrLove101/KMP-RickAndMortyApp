@@ -27,7 +27,6 @@ import com.orlove.mortyapp.ui.screens.details.components.InfoCard
 import com.orlove.mortyapp.ui.screens.details.components.InfoRow
 import com.orlove.mortyapp.util.collectInLaunchedEffect
 import com.orlove.mortyapp.util.use
-import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,20 +53,21 @@ fun CharacterDetailScreen(
         }
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.character_details)) },
-                navigationIcon = {
-                    IconButton(
-                        onClick = { dispatch(CharacterDetailContract.Event.NavigateBack) }
-                    ) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
-                    }
-                }
+    Column {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = { dispatch(CharacterDetailContract.Event.NavigateBack) }
+            ) {
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
+            }
+            Spacer(modifier = Modifier.width(width = 16.dp))
+            Text(
+                text = stringResource(R.string.character_details),
+                style = MaterialTheme.typography.headlineSmall
             )
         }
-    ) { _ ->
         when {
             state.isLoading -> {
                 LoadingState()
@@ -102,10 +102,12 @@ private fun CharacterDetailContent(
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             ) {
                 Column(
-                    modifier = Modifier.padding(20.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {

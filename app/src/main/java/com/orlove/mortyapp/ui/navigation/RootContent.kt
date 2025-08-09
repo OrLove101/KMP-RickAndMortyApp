@@ -24,7 +24,8 @@ fun RootContent(component: RootComponent, modifier: Modifier = Modifier) {
             is RootComponent.Child.CharacterDetail -> CharacterDetailScreen(
                 onNavigateBack = child.component::navigateBack,
                 viewModel = koinViewModel(
-                    parameters = { parametersOf(child.component.characterId) }
+                    parameters = { parametersOf(child.component.characterId) },
+                    key = "character_${child.component.characterId}",
                 )
             )
         }
