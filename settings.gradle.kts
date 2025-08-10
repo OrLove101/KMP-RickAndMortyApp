@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MortyApp"
 include(":app")
- 
+include(":shared")

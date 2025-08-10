@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.orlove.mortyapp.R
-import com.orlove.mortyapp.util.constants.CharacterStatus
+import com.orlove.mortyapp.utils.constants.CharacterStatus
 
 @Composable
 fun StatusChip(status: CharacterStatus) {

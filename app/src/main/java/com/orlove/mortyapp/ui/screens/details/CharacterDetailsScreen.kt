@@ -72,16 +72,16 @@ fun CharacterDetailScreen(
                 LoadingState()
             }
 
-            state.error != null -> {
+            state.error  -> {
                 ErrorState(
-                    error = state.error,
+                    error = stringResource(R.string.oops_something_went_wrong),
                     onRetry = { dispatch(CharacterDetailContract.Event.RetryLoading) },
                 )
             }
 
             state.character != null -> {
                 CharacterDetailContent(
-                    character = state.character,
+                    character = state.character!!,
                 )
             }
         }

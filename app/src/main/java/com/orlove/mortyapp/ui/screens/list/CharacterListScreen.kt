@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.orlove.mortyapp.R
 import com.orlove.mortyapp.ui.components.EmptyState
@@ -77,9 +78,9 @@ private fun CharacterListContent(
                 LoadingState()
             }
 
-            state.error != null -> {
+            state.error -> {
                 ErrorState(
-                    error = state.error,
+                    error = stringResource(R.string.oops_something_went_wrong),
                     onRetry = { onEvent(CharacterListContract.Event.RetryLoading) }
                 )
             }
