@@ -21,11 +21,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.orlove.mortyapp.R
 import com.orlove.mortyapp.ui.components.ErrorState
-import com.orlove.mortyapp.ui.components.LoadingState
 import com.orlove.mortyapp.ui.model.RickAndMortyCharacterUi
 import com.orlove.mortyapp.ui.screens.details.components.InfoCard
 import com.orlove.mortyapp.ui.screens.details.components.InfoRow
+import com.orlove.mortyapp.ui.theme.Spacing
 import com.orlove.mortyapp.util.collectInLaunchedEffect
+import com.orlove.mortyapp.util.components.ProgressLoader
 import com.orlove.mortyapp.util.use
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -61,7 +62,7 @@ fun CharacterDetailScreen(
             ) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
             }
-            Spacer(modifier = Modifier.width(width = 16.dp))
+            Spacer(modifier = Modifier.width(width = Spacing.large))
             Text(
                 text = stringResource(R.string.character_details),
                 style = MaterialTheme.typography.headlineSmall
@@ -69,7 +70,7 @@ fun CharacterDetailScreen(
         }
         when {
             state.isLoading -> {
-                LoadingState()
+                ProgressLoader()
             }
 
             state.error  -> {
@@ -95,8 +96,8 @@ private fun CharacterDetailContent(
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        contentPadding = PaddingValues(all = Spacing.large),
+        verticalArrangement = Arrangement.spacedBy(space = Spacing.large)
     ) {
         item {
             Card(

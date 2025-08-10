@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.orlove.mortyapp.R
+import com.orlove.mortyapp.ui.theme.Spacing
 import com.orlove.mortyapp.utils.constants.CharacterStatus
 
 @Composable
@@ -30,7 +31,7 @@ fun StatusChip(status: CharacterStatus) {
     ) {
         Text(
             text = text,
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+            modifier = Modifier.padding(horizontal = Spacing.medium, vertical = Spacing.small),
             style = MaterialTheme.typography.labelSmall,
             color = color,
             fontWeight = FontWeight.Medium

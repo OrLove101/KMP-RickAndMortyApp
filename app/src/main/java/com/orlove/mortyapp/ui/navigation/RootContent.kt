@@ -3,6 +3,8 @@ package com.orlove.mortyapp.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
+import com.arkivanov.decompose.extensions.compose.stack.animation.slide
+import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.orlove.mortyapp.ui.screens.details.CharacterDetailScreen
 import com.orlove.mortyapp.ui.screens.list.CharacterListScreen
 import org.koin.androidx.compose.koinViewModel
@@ -13,6 +15,7 @@ fun RootContent(component: RootComponent, modifier: Modifier = Modifier) {
     Children(
         stack = component.stack,
         modifier = modifier,
+        animation = stackAnimation(slide())
     ) {
         when (val child = it.instance) {
             is RootComponent.Child.CharacterList -> CharacterListScreen(

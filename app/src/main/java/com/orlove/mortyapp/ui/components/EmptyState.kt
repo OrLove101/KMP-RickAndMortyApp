@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.orlove.mortyapp.R
+import com.orlove.mortyapp.ui.theme.Spacing
 
 @Composable
 fun EmptyState(modifier: Modifier = Modifier) {
@@ -26,7 +27,7 @@ fun EmptyState(modifier: Modifier = Modifier) {
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(space = Spacing.large)
         ) {
             Icon(
                 imageVector = Icons.Default.Info,

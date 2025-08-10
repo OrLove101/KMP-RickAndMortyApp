@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.orlove.mortyapp.R
 import com.orlove.mortyapp.ui.model.RickAndMortyCharacterUi
+import com.orlove.mortyapp.ui.theme.Spacing
 
 @Composable
 fun CharacterItem(
@@ -42,7 +43,7 @@ fun CharacterItem(
         border = BorderStroke(width = 1.dp, color = Color.Black)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(all = Spacing.large),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             AsyncImage(
@@ -50,13 +51,13 @@ fun CharacterItem(
                 contentDescription = character.name,
                 modifier = Modifier
                     .size(80.dp)
-                    .clip(RoundedCornerShape(8.dp)),
+                    .clip(RoundedCornerShape(size = Spacing.small)),
                 contentScale = ContentScale.Crop
             )
 
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                verticalArrangement = Arrangement.spacedBy(space = Spacing.small)
             ) {
                 Text(
                     text = character.name,

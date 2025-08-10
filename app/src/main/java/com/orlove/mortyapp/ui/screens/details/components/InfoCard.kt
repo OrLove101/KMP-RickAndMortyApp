@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.orlove.mortyapp.ui.theme.Spacing
 
 @Composable
 fun InfoCard(
@@ -24,8 +25,8 @@ fun InfoCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier.padding(all = Spacing.large),
+            verticalArrangement = Arrangement.spacedBy(space = Spacing.medium)
         ) {
             Text(
                 text = title,

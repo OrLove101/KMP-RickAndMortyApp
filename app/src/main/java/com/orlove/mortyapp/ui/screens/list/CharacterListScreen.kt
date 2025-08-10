@@ -14,10 +14,11 @@ import androidx.compose.ui.unit.dp
 import com.orlove.mortyapp.R
 import com.orlove.mortyapp.ui.components.EmptyState
 import com.orlove.mortyapp.ui.components.ErrorState
-import com.orlove.mortyapp.ui.components.LoadingState
 import com.orlove.mortyapp.ui.components.SearchTextField
 import com.orlove.mortyapp.ui.screens.list.components.CharacterItem
+import com.orlove.mortyapp.ui.theme.Spacing
 import com.orlove.mortyapp.util.collectInLaunchedEffect
+import com.orlove.mortyapp.util.components.ProgressLoader
 import com.orlove.mortyapp.util.use
 import org.koin.androidx.compose.koinViewModel
 
@@ -70,12 +71,12 @@ private fun CharacterListContent(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(all = Spacing.large)
         )
 
         when {
             state.isLoading -> {
-                LoadingState()
+                ProgressLoader()
             }
 
             state.error -> {
@@ -91,7 +92,7 @@ private fun CharacterListContent(
 
             else -> {
                 LazyColumn(
-                    contentPadding = PaddingValues(16.dp),
+                    contentPadding = PaddingValues(all = Spacing.medium),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     itemsIndexed(
