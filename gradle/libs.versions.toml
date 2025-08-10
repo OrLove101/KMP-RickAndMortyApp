@@ -1,7 +1,7 @@
 [versions]
 agp = "8.11.1"
 animation = "1.6.1"
-coilCompose = "2.5.0"
+coilCompose = "3.0.4"
 composeBomVersion = "2024.02.00"
 coreKtxVersion = "1.12.0"
 decompose = "3.3.0"
@@ -16,13 +16,13 @@ espressoCore = "3.7.0"
 kotlinxCoroutines = "1.7.3"
 kotlinxCoroutinesCore = "1.8.0"
 kotlinxSerializationJson = "1.6.2"
-ktorClientContentNegotiation = "2.3.7"
-ktorClientCore = "2.3.7"
-ktorClientAndroid = "2.3.7"
-ktorClientDarwin = "2.3.7"
-ktorClientOkhttp = "2.3.7"
-ktorSerializationKotlinxJson = "2.3.7"
-ktorClientLogging = "2.3.7"
+ktorClientContentNegotiation = "3.2.3"
+ktorClientCore = "3.2.3"
+ktorClientAndroid = "3.2.3"
+ktorClientDarwin = "3.2.3"
+ktorClientOkhttp = "3.2.3"
+ktorSerializationKotlinxJson = "3.2.3"
+ktorClientLogging = "3.2.3"
 lifecycleRuntimeKtx = "2.9.2"
 activityCompose = "1.10.1"
 composeBom = "2024.09.00"
@@ -34,6 +34,8 @@ lifecycleViewmodel = "2.8.4"
 room = "2.7.2"
 sqlite = "2.5.2"
 ksp = "2.2.0-2.0.2"
+composeMultiplatform = "1.8.2"
+koinMultiplatform="4.1.0"
 
 [libraries]
 androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "animation" }
@@ -51,8 +53,7 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 animation = { module = "androidx.compose.animation:animation" }
-androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 ext-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -85,6 +86,9 @@ material3 = { module = "androidx.compose.material3:material3" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 ui = { module = "androidx.compose.ui:ui" }
 androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+koin-compose = {module="io.insert-koin:koin-compose", version.ref = "koinMultiplatform"}
+koin-composeVM = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinMultiplatform" }
+coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coilCompose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -94,4 +98,5 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 androidx-room = { id = "androidx.room", version.ref = "room" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 
