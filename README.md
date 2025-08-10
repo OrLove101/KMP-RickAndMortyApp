@@ -1,4 +1,4 @@
-## KMP MVI application (
+# KMP MVI application
 - KMP to share code between ios and android
 - MVI for ui architecture
 - Room
@@ -11,4 +11,4 @@
 ## Tips
 - run ./gradlew linkDebugFrameworkIosArm64 if you ios can't find "Shared" module
 
-### Please contact me if you have any questions or problems with the application as I have tested it and didn't find any issues :)
+#### Please contact me if you have any questions or problems with the application as I have tested it and didn't find any issues :)
