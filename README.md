@@ -11,4 +11,4 @@
 - Animations
 
 ## Tips
-- run ./gradlew linkDebugFrameworkIosArm64 if you ios can't find "Shared" module
+- run ./gradlew linkDebugFrameworkIosArm64 or any related Ios target if you ios can't find "Shared" module
