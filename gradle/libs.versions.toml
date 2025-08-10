@@ -1,5 +1,5 @@
 [versions]
-agp = "8.10.1"
+agp = "8.11.1"
 animation = "1.6.1"
 coilCompose = "2.5.0"
 composeBomVersion = "2024.02.00"
@@ -8,7 +8,7 @@ decompose = "3.3.0"
 koinAndroid = "3.5.3"
 koinAndroidxCompose = "3.5.3"
 koinCore = "3.5.3"
-kotlin = "2.0.21"
+kotlin = "2.2.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
@@ -33,7 +33,7 @@ android-targetSdk = "35"
 lifecycleViewmodel = "2.8.4"
 room = "2.7.2"
 sqlite = "2.5.2"
-ksp = "2.0.21-1.0.27"
+ksp = "2.2.0-2.0.2"
 
 [libraries]
 androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "animation" }

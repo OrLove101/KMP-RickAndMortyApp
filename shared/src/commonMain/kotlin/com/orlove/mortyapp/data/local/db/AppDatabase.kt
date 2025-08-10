@@ -1,5 +1,6 @@
 package com.orlove.mortyapp.data.local.db
 
+import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
@@ -17,6 +18,7 @@ import kotlinx.coroutines.IO
     version = DATABASE_VERSION,
     exportSchema = false
 )
+@ConstructedBy(AppDatabaseConstructor::class)
 @TypeConverters(StringListConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun characterDao(): CharacterDao
@@ -33,7 +35,7 @@ abstract class AppDatabase : RoomDatabase() {
     }
 }
 
-@Suppress("NO_ACTUAL_FOR_EXPECT")
+@Suppress("KotlinNoActualForExpect")
 expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase> {
     override fun initialize(): AppDatabase
 }
