@@ -1,6 +1,6 @@
 ### Please contact me if you have any questions or problems with the application as I have tested it and didn't find any issues :)
-# KMP MVI application
-- KMP to share code between ios and android
+# Compose Multiplatform application with MVI architecture
+- Compose for android and ios shared ui
 - MVI for ui architecture
 - Room
 - Models layer separation
