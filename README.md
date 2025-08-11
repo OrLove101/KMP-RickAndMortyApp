@@ -10,4 +10,4 @@
 - Animations
 
 ## Tips
-- run ./gradlew linkDebugFrameworkIosArm64 or any related Ios target if you ios can't find "ComposeApp" module
+- run ./gradlew linkDebugFrameworkIosArm64 or any related ios target if ios can't find "ComposeApp" module
