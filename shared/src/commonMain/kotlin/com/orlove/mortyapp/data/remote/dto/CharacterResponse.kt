@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CharacterResponseDto(
-    val info: InfoDto?,
-    val results: List<CharacterDto>?
+    val info: InfoDto? = null,
+    val results: List<CharacterDto>? = null
 )
 
 @Serializable

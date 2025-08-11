@@ -12,9 +12,9 @@ class CharacterRepositoryImpl(
     private val characterDao: CharacterDao
 ) : CharacterRepository {
 
-    override suspend fun getCharacters(page: Int): Result<List<RickAndMortyCharacter>> {
+    override suspend fun getCharacters(page: Int, name: String): Result<List<RickAndMortyCharacter>> {
         return try {
-            val response = apiService.getCharacters(page)
+            val response = apiService.getCharacters(page = page, name = name)
             response.fold(
                 onSuccess = { dto ->
                     val characters = dto.results?.map { it.toDomain() }.orEmpty()
@@ -26,7 +26,7 @@ class CharacterRepositoryImpl(
                 },
                 onFailure = { error ->
                     val cachedEntities = if (page == 1) {
-                        characterDao.getAllCharacters()
+                        characterDao.getAllCharacters(name = name)
                     } else {
                         emptyList()
                     }
@@ -37,15 +37,6 @@ class CharacterRepositoryImpl(
                     }
                 }
             )
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
-
-    override suspend fun searchCharacters(query: String): Result<List<RickAndMortyCharacter>> {
-        return try {
-            val entities = characterDao.searchCharacters(query)
-            Result.success(entities.map { it.toDomain() })
         } catch (e: Exception) {
             Result.failure(e)
         }

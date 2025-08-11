@@ -13,11 +13,15 @@ abstract class CharacterDao : BaseDao<CharacterEntity>() {
           * 
         FROM 
           characters 
+        WHERE 
+          name 
+        LIKE 
+          '%' || :name || '%' 
         ORDER BY 
           page, id
         """
     )
-    abstract suspend fun getAllCharacters(): List<CharacterEntity>
+    abstract suspend fun getAllCharacters(name: String): List<CharacterEntity>
 
     @Query(
         """
@@ -30,22 +34,6 @@ abstract class CharacterDao : BaseDao<CharacterEntity>() {
         """
     )
     abstract suspend fun getCharacterById(id: Int): CharacterEntity?
-
-    @Query(
-        """
-        SELECT
-          * 
-        FROM 
-          characters 
-        WHERE 
-          name 
-        LIKE 
-          '%' || :query || '%' 
-        ORDER BY 
-          page, id
-        """
-    )
-    abstract suspend fun searchCharacters(query: String): List<CharacterEntity>
 
     @Query(
         """

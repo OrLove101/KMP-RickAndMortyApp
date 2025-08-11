@@ -7,6 +7,6 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 actual fun presentationModulePlatform(): Module = module {
-    viewModel { CharacterListViewModel(get(), get()) }
+    viewModel { CharacterListViewModel(get()) }
     viewModel { CharacterDetailViewModel(get(), get()) }
 }

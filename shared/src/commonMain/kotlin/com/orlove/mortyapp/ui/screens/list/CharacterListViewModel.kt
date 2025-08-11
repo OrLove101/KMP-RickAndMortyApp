@@ -3,7 +3,6 @@ package com.orlove.mortyapp.ui.screens.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.orlove.mortyapp.domain.usecase.GetCharactersUseCase
-import com.orlove.mortyapp.domain.usecase.SearchCharactersUseCase
 import com.orlove.mortyapp.ui.model.mapper.toUi
 import com.orlove.mortyapp.utils.DefaultPaginator
 import com.orlove.mortyapp.utils.UnidirectionalViewModel
@@ -11,8 +10,7 @@ import com.orlove.mortyapp.utils.mvi
 import kotlinx.coroutines.*
 
 class CharacterListViewModel(
-    private val getCharactersUseCase: GetCharactersUseCase,
-    private val searchCharactersUseCase: SearchCharactersUseCase
+    private val getCharactersUseCase: GetCharactersUseCase
 ) : ViewModel(),
     UnidirectionalViewModel<CharacterListContract.State, CharacterListContract.Event, CharacterListContract.Effect> by mvi(
         CharacterListContract.State()
@@ -33,7 +31,7 @@ class CharacterListViewModel(
             }
         },
         onRequest = { page ->
-            getCharactersUseCase(page)
+            getCharactersUseCase(page = page, name = state.value.searchQuery)
         },
         getNextKey = { items ->
             if (items.isEmpty()) state.value.page else state.value.page + 1
@@ -97,7 +95,6 @@ class CharacterListViewModel(
             if (
                 !state.value.endReached
                 && !state.value.isLoadingMore
-                && state.value.searchQuery.isEmpty()
             ) {
                 paginator.loadNextItems()
             }
@@ -106,40 +103,7 @@ class CharacterListViewModel(
 
     private fun searchCharacters(query: String) {
         updateUiState { copy(searchQuery = query) }
-
-        if (query.isBlank()) {
-            clearSearch()
-            return
-        }
-
-        viewModelScope.launch {
-            try {
-                val result = searchCharactersUseCase(query)
-                result.fold(
-                    onSuccess = { characters ->
-                        updateUiState {
-                            copy(
-                                characters = characters.map { it.toUi() },
-                                error = false
-                            )
-                        }
-                    },
-                    onFailure = { _ ->
-                        updateUiState {
-                            copy(
-                                error = true,
-                            )
-                        }
-                    }
-                )
-            } catch (e: Exception) {
-                updateUiState {
-                    copy(
-                        error = true,
-                    )
-                }
-            }
-        }
+        loadCharacters()
     }
 
     private fun clearSearch() {
