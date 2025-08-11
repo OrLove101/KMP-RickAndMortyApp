@@ -89,6 +89,7 @@ class CharacterListViewModel(
             CharacterListContract.Event.RetryLoading -> retryLoading()
             is CharacterListContract.Event.GenderChanged -> searchCharacters(gender = event.gender)
             is CharacterListContract.Event.StatusChanged -> searchCharacters(status = event.status)
+            CharacterListContract.Event.ClearFilters -> clearFilters()
         }
     }
 
@@ -128,6 +129,16 @@ class CharacterListViewModel(
 
     private fun clearSearch() {
         updateUiState { copy(searchQuery = "") }
+        loadCharacters()
+    }
+
+    private fun clearFilters() {
+        updateUiState {
+            copy(
+                selectedGender = null,
+                selectedStatus = null
+            )
+        }
         loadCharacters()
     }
 

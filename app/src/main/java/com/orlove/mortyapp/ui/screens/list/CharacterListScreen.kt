@@ -1,6 +1,7 @@
 package com.orlove.mortyapp.ui.screens.list
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
@@ -72,7 +73,7 @@ private fun CharacterListContent(
                 .padding(horizontal = Spacing.large)
         ) {
             Text(
-                text = stringResource(R.string.character_list),
+                text = stringResource(R.string.characters),
                 style = MaterialTheme.typography.headlineSmall
             )
             Row(
@@ -84,12 +85,23 @@ private fun CharacterListContent(
                         onEvent(CharacterListContract.Event.StatusChanged(status = status))
                     }
                 )
-
+                Spacer(
+                    modifier = Modifier.width(width = 16.dp)
+                )
                 GenderDropdownMenu(
                     selectedGender = state.selectedGender,
                     onGenderSelected = { gender ->
                         onEvent(CharacterListContract.Event.GenderChanged(gender = gender))
                     }
+                )
+                Spacer(
+                    modifier = Modifier.width(width = 16.dp)
+                )
+                Text(
+                    modifier = Modifier.clickable {
+                        onEvent(CharacterListContract.Event.ClearFilters)
+                    },
+                    text = stringResource(R.string.clear_filters),
                 )
             }
         }

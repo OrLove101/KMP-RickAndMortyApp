@@ -31,5 +31,6 @@
     <string name="search">Search</string>
     <string name="clear">Clear</string>
     <string name="oops_something_went_wrong">Oops! Something went wrong.</string>
-    <string name="character_list">Character List</string>
+    <string name="clear_filters">Clear Filters</string>
+    <string name="characters">Characters</string>
 </resources>

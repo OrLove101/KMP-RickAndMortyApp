@@ -24,6 +24,7 @@ interface CharacterListContract {
         data class StatusChanged(val status: CharacterStatus) : Event
         data class GenderChanged(val gender: CharacterGender) : Event
         data object ClearSearch : Event
+        data object ClearFilters : Event
         data class OnCharacterClick(val character: RickAndMortyCharacterUi) : Event
         data object RetryLoading : Event
     }
