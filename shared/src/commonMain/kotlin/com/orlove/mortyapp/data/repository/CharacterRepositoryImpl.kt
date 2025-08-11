@@ -6,15 +6,28 @@ import com.orlove.mortyapp.ui.model.mapper.toEntity
 import com.orlove.mortyapp.data.remote.api.RichAndMortyApiDataSource
 import com.orlove.mortyapp.domain.model.RickAndMortyCharacter
 import com.orlove.mortyapp.domain.repository.CharacterRepository
+import com.orlove.mortyapp.utils.constants.CharacterGender
+import com.orlove.mortyapp.utils.constants.CharacterStatus
 
 class CharacterRepositoryImpl(
     private val apiService: RichAndMortyApiDataSource,
     private val characterDao: CharacterDao
 ) : CharacterRepository {
 
-    override suspend fun getCharacters(page: Int, name: String): Result<List<RickAndMortyCharacter>> {
+    override suspend fun getCharacters(
+        page: Int,
+        name: String,
+        gender: CharacterGender?,
+        status: CharacterStatus?
+    ): Result<List<RickAndMortyCharacter>> {
         return try {
-            val response = apiService.getCharacters(page = page, name = name)
+            val response =
+                apiService.getCharacters(
+                    page = page,
+                    name = name,
+                    gender = gender?.name?.lowercase(),
+                    status = status?.name?.lowercase()
+                )
             response.fold(
                 onSuccess = { dto ->
                     val characters = dto.results?.map { it.toDomain() }.orEmpty()
@@ -26,7 +39,11 @@ class CharacterRepositoryImpl(
                 },
                 onFailure = { error ->
                     val cachedEntities = if (page == 1) {
-                        characterDao.getAllCharacters(name = name)
+                        characterDao.getAllCharacters(
+                            name = name,
+                            status = status?.name,
+                            gender = gender?.name
+                        )
                     } else {
                         emptyList()
                     }

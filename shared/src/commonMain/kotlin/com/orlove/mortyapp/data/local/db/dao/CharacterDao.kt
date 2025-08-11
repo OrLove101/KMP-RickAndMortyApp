@@ -16,12 +16,18 @@ abstract class CharacterDao : BaseDao<CharacterEntity>() {
         WHERE 
           name 
         LIKE 
-          '%' || :name || '%' 
+          '%' || :name || '%'
+        AND (:status IS NULL OR LOWER(status) = LOWER(:status))
+        AND (:gender IS NULL OR LOWER(gender) = LOWER(:gender))
         ORDER BY 
           page, id
         """
     )
-    abstract suspend fun getAllCharacters(name: String): List<CharacterEntity>
+    abstract suspend fun getAllCharacters(
+        name: String,
+        status: String?,
+        gender: String?
+    ): List<CharacterEntity>
 
     @Query(
         """

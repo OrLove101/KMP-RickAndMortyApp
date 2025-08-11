@@ -2,6 +2,7 @@ package com.orlove.mortyapp.ui.screens.list
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.*
@@ -15,6 +16,8 @@ import com.orlove.mortyapp.R
 import com.orlove.mortyapp.ui.components.EmptyState
 import com.orlove.mortyapp.ui.components.ErrorState
 import com.orlove.mortyapp.ui.components.SearchTextField
+import com.orlove.mortyapp.ui.screens.details.components.GenderDropdownMenu
+import com.orlove.mortyapp.ui.screens.details.components.StatusDropdownMenu
 import com.orlove.mortyapp.ui.screens.list.components.CharacterItem
 import com.orlove.mortyapp.ui.theme.Spacing
 import com.orlove.mortyapp.util.collectInLaunchedEffect
@@ -61,6 +64,35 @@ private fun CharacterListContent(
 ) {
 
     Column {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = Spacing.large)
+        ) {
+            Text(
+                text = stringResource(R.string.character_list),
+                style = MaterialTheme.typography.headlineSmall
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                StatusDropdownMenu(
+                    selectedStatus = state.selectedStatus,
+                    onStatusSelected = { status ->
+                        onEvent(CharacterListContract.Event.StatusChanged(status = status))
+                    }
+                )
+
+                GenderDropdownMenu(
+                    selectedGender = state.selectedGender,
+                    onGenderSelected = { gender ->
+                        onEvent(CharacterListContract.Event.GenderChanged(gender = gender))
+                    }
+                )
+            }
+        }
         SearchTextField(
             query = state.searchQuery,
             onQueryChange = { query ->

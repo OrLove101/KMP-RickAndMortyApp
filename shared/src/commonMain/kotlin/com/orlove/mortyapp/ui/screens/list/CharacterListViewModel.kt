@@ -6,6 +6,8 @@ import com.orlove.mortyapp.domain.usecase.GetCharactersUseCase
 import com.orlove.mortyapp.ui.model.mapper.toUi
 import com.orlove.mortyapp.utils.DefaultPaginator
 import com.orlove.mortyapp.utils.UnidirectionalViewModel
+import com.orlove.mortyapp.utils.constants.CharacterGender
+import com.orlove.mortyapp.utils.constants.CharacterStatus
 import com.orlove.mortyapp.utils.mvi
 import kotlinx.coroutines.*
 
@@ -31,7 +33,12 @@ class CharacterListViewModel(
             }
         },
         onRequest = { page ->
-            getCharactersUseCase(page = page, name = state.value.searchQuery)
+            getCharactersUseCase(
+                page = page,
+                name = state.value.searchQuery,
+                gender = state.value.selectedGender,
+                status = state.value.selectedStatus
+            )
         },
         getNextKey = { items ->
             if (items.isEmpty()) state.value.page else state.value.page + 1
@@ -69,16 +76,19 @@ class CharacterListViewModel(
         when (event) {
             CharacterListContract.Event.LoadCharacters -> loadCharacters()
             CharacterListContract.Event.LoadMore -> loadMore()
-            is CharacterListContract.Event.SearchCharacters -> searchCharacters(event.query)
+            is CharacterListContract.Event.SearchCharacters -> searchCharacters(query = event.query)
             CharacterListContract.Event.ClearSearch -> clearSearch()
             is CharacterListContract.Event.OnCharacterClick -> {
                 viewModelScope
                     .emitSideEffect(
-                        CharacterListContract.Effect.NavigateToDetail(event.character.id)
+                        CharacterListContract.Effect
+                            .NavigateToDetail(event.character.id)
                     )
             }
 
             CharacterListContract.Event.RetryLoading -> retryLoading()
+            is CharacterListContract.Event.GenderChanged -> searchCharacters(gender = event.gender)
+            is CharacterListContract.Event.StatusChanged -> searchCharacters(status = event.status)
         }
     }
 
@@ -101,8 +111,18 @@ class CharacterListViewModel(
         }
     }
 
-    private fun searchCharacters(query: String) {
-        updateUiState { copy(searchQuery = query) }
+    private fun searchCharacters(
+        query: String = state.value.searchQuery,
+        gender: CharacterGender? = state.value.selectedGender,
+        status: CharacterStatus? = state.value.selectedStatus
+    ) {
+        updateUiState {
+            copy(
+                searchQuery = query,
+                selectedGender = gender,
+                selectedStatus = status,
+            )
+        }
         loadCharacters()
     }
 
